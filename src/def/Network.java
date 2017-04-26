@@ -3,7 +3,9 @@ package def;
 import java.io.FilterInputStream;
 
 public class Network {
-	 double Error;
+	 private static final double A_CONST = 0.3;
+	private static final double E_CONST = 0.7;
+	double Error;
 	 double IdealValue = 1;
 	 Layer firstLayer;
 	 Layer secondLayer;
@@ -56,6 +58,12 @@ public class Network {
   CountSigma(thirdLayer, outLayer);
   CountSigma(secondLayer, thirdLayer);
   CountSigma(firstLayer, secondLayer);
+  
+  CountGrad(thirdLayer, outLayer);
+  CountGrad(secondLayer, thirdLayer);
+  CountGrad(firstLayer, secondLayer);
+  
+  CountDelta(thirdLayer);
   
   firstLayer.toString();
    secondLayer.toString();
@@ -113,5 +121,33 @@ public class Network {
 		 		
 		 	}
 		
+	}
+	
+	void CountGrad(Layer curentLayer, Layer nextLayer){
+		
+		
+	 	for (Neyron a: curentLayer.masNeyron){
+	 		a.grad = new double[nextLayer.masNeyron.length];
+	 		int iGrad = 0;
+	 		double grad = 0;
+	 		
+	 		for(Neyron b: nextLayer.masNeyron){
+	 			grad = a.value * b.sigma;
+	 			a.grad[iGrad] = grad;
+	 			iGrad++;
+	 			
+	 		}
+	 	}	
+	} 
+	
+	void CountDelta(Layer curentLayer){
+		// Реализовать подсчет дельты для каждого синапса с учетом хранения предыдущего состояния дельты 
+		int iDelta = 0;
+		for (Neyron a: curentLayer.masNeyron){
+			a.delta = new double [a.wieght.length];
+			if (a.prevDelta == null){a.prevDelta = new double[a.delta.length];}
+			a.delta[iDelta] = E_CONST * a.grad[iDelta] + A_CONST*a.prevDelta[iDelta];
+			iDelta++;
+		}
 	}
 }

@@ -7,6 +7,10 @@ public class Neyron implements Neyro_Interface {
     double[] wieght = {};
 	double value ;
 	double activeVal;
+	double[] grad = {};
+	double[] prevDelta = {};
+	double[] delta = {};
+	
 	public Neyron() {
 		
 	}
@@ -34,8 +38,20 @@ public class Neyron implements Neyro_Interface {
 		System.out.println("value = "+ value);
 		System.out.println("activeVal = "+ activeVal);
 		System.out.println("sigma = "+ sigma);
+		System.out.println("grad  = ");
+		for (double a: grad){
+			System.out.println(a);
+		}
 		System.out.println("weight = ");
 		for (double a: wieght){
+			System.out.println(a);
+		}
+		System.out.println("prevDelta = ");
+		for (double a: prevDelta){
+			System.out.println(a);
+		}
+		System.out.println("Delta = ");
+		for (double a: delta){
 			System.out.println(a);
 		}
 		return super.toString();
