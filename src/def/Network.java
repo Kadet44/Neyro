@@ -9,6 +9,7 @@ public class Network {
 	 Layer secondLayer;
 	 Layer thirdLayer;
 	 Layer outLayer;
+	 
 	public Network() {
   Neyron n1 = new Neyron(0.8 ,"n1");
   Neyron n2 = new Neyron(10,"n2");
@@ -50,6 +51,13 @@ public class Network {
 
   outLayer.active();
   
+
+  CountSigmaOut();
+  CountSigma(thirdLayer, outLayer);
+  CountSigma(secondLayer, thirdLayer);
+  CountSigma(firstLayer, secondLayer);
+  
+  firstLayer.toString();
    secondLayer.toString();
    thirdLayer.toString();
    outLayer.toString();
@@ -58,7 +66,7 @@ public class Network {
    
 }
 	
-	// Передача сигналов на след. уровень, установка value
+	// РЈСЃС‚Р°РЅРѕРІРєР° Р·РЅР°С‡РµРЅРёР№ value РїРѕСЃР»Рµ Р°РєС‚РёРІР°С†РёРё РїРµСЂРІРѕРіРѕ СЃР»РѕСЏ
 	void NetStart(Layer prevLayer, Layer nextLayer){
 	
 		for (Neyron prev : prevLayer.masNeyron){
@@ -76,7 +84,7 @@ public class Network {
 	
 
 	}
-	// MSE ошибка
+	// MSE пїЅпїЅпїЅпїЅпїЅпїЅ
 	void CountError(){
 		Error = (IdealValue-outLayer.masNeyron[0].activeVal);
 		
@@ -86,11 +94,24 @@ public class Network {
 	}
 	
 	void CountSigmaOut(){
-    double fIn= (1 - outLayer.masNeyron[0].activeVal)*outLayer.masNeyron[0].activeVal;
-    double sigma = (IdealValue - outLayer.masNeyron[0].activeVal ) * fIn; 
+	    double fIn= (IdealValue - outLayer.masNeyron[0].activeVal)*outLayer.masNeyron[0].activeVal;
+	    double sigma = (IdealValue - outLayer.masNeyron[0].activeVal ) * fIn;
+	    //System.out.println("///////////////////// "+ sigma);
+	    outLayer.masNeyron[0].sigma = sigma;
 	}
 	
 	void CountSigma(Layer curentLayer, Layer nextLayer){
+		 double fIn= (IdealValue - outLayer.masNeyron[0].activeVal)*outLayer.masNeyron[0].activeVal;
+		 	for (Neyron a: curentLayer.masNeyron){
+		 		int iWiwght = 0; //РЎС‡РµС‚С‡РёРє  РЅРµР№СЂРѕРЅР°(РґР»СЏ РїРµСЂРµР±РѕСЂР° РІРµСЃРѕРІ)
+		 		double sigma = 0 ;
+		 		for(Neyron b: nextLayer.masNeyron){
+		 			 sigma = sigma + a.wieght[iWiwght]*b.sigma;
+		 			 iWiwght++;
+		 		}
+		 		a.sigma = sigma;
+		 		
+		 	}
 		
 	}
 }

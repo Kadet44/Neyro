@@ -14,7 +14,7 @@ public class Neyron implements Neyro_Interface {
 		this.value = value;
 		this.name = name;
 	}
-    // Функция активации сигмоид
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	@Override
 	public void activate() {
 		double nowValue = this.value; 
@@ -22,7 +22,7 @@ public class Neyron implements Neyro_Interface {
 		//System.out.println(activeVal);
 		this.activeVal = activeVal;
 	}
-	//Установка весов всем синапсам нейрона 
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 	@Override
 	public void setWeight(double[] d) {
 		this.wieght = d; // TODO Auto-generated method stub
@@ -33,7 +33,8 @@ public class Neyron implements Neyro_Interface {
 		System.out.println("name = "+ name);
 		System.out.println("value = "+ value);
 		System.out.println("activeVal = "+ activeVal);
-		System.out.print("weight = ");
+		System.out.println("sigma = "+ sigma);
+		System.out.println("weight = ");
 		for (double a: wieght){
 			System.out.println(a);
 		}

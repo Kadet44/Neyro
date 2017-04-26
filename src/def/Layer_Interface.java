@@ -1,10 +1,12 @@
 package def;
 
+
+
 public interface Layer_Interface {
 	
 	
 	Neyron[] getLayer(int numLayer);
-	//Задать случайные веса 
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
 	
 	void setRadomWeight(Layer nextlayer);
 

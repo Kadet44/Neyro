@@ -14,12 +14,12 @@ public class Layer implements Layer_Interface {
 	}
 
 
-	//Возвращает массив нейронов на заданном уровне
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	public Neyron[] getLayer(int numLayer) {
 		
 		return this.masNeyron;
 	}
-    // Установка случайных  весов
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅ
 	@Override
 	public void setRadomWeight(Layer nextlayer) {
 		int numNeyNextLayer = nextlayer.masNeyron.length;
@@ -28,7 +28,7 @@ public class Layer implements Layer_Interface {
 			
 			double[] masWeiht = new double[numNeyNextLayer];
 			
-			// смотрит кол нейронов в следующем слое и создает масиив весов для текущего слоя 
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 
 			for (int a=0; a < numNeyNextLayer;a++){
 				double random = Math.random();
 				masWeiht[a] = random;
