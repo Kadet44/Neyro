@@ -40,14 +40,17 @@ public class Network {
   
   
   firstLayer.setRadomWeight(secondLayer);
+  secondLayer.setRadomWeight(thirdLayer);
+  thirdLayer.setRadomWeight(outLayer);
+  for(int t = 0;t<4;t++){
   firstLayer.active();
   NetStart(firstLayer, secondLayer);
   
-  secondLayer.setRadomWeight(thirdLayer);
+ 
   secondLayer.active();
   NetStart(secondLayer, thirdLayer);
   
-  thirdLayer.setRadomWeight(outLayer);
+
   thirdLayer.active();
   NetStart(thirdLayer, outLayer);
 
@@ -67,11 +70,19 @@ public class Network {
   CountDelta(secondLayer);
   CountDelta(firstLayer);
   
+ 
+  
    firstLayer.toString();
    secondLayer.toString();
    thirdLayer.toString();
    outLayer.toString();
    CountError();
+   
+   ChangeWeight(firstLayer);
+   ChangeWeight(secondLayer);
+   ChangeWeight(thirdLayer);
+  }
+   
    
    
 }
@@ -159,6 +170,14 @@ public class Network {
 			a.delta[g] = E_CONST * a.grad[g] + A_CONST*a.prevDelta[g];
 			a.prevDelta[g] = a.delta[g]; 
 			}
+		}
+	}
+	
+	void ChangeWeight(Layer curentLayer){
+		for (Neyron a: curentLayer.masNeyron){
+			 for(int i =0; i< a.wieght.length;i++){
+				 a.wieght[i] = a.wieght[i] + a.delta[i];
+			 }
 		}
 	}
 }
