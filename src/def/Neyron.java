@@ -8,8 +8,9 @@ public class Neyron implements Neyro_Interface {
 	double value ;
 	double activeVal;
 	double[] grad = {};
-	double[] prevDelta = {};
-	double[] delta = {};
+	boolean firstDelta = true;
+	double[] prevDelta={} ;
+	double[] delta = new double[4];
 	
 	public Neyron() {
 		

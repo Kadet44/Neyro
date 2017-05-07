@@ -64,13 +64,15 @@ public class Network {
   CountGrad(firstLayer, secondLayer);
   
   CountDelta(thirdLayer);
+  CountDelta(secondLayer);
+  CountDelta(firstLayer);
   
-  firstLayer.toString();
+   firstLayer.toString();
    secondLayer.toString();
    thirdLayer.toString();
    outLayer.toString();
    CountError();
-   //outLayer.active();
+   
    
 }
 	
@@ -145,9 +147,18 @@ public class Network {
 		int iDelta = 0;
 		for (Neyron a: curentLayer.masNeyron){
 			a.delta = new double [a.wieght.length];
-			if (a.prevDelta == null){a.prevDelta = new double[a.delta.length];}
-			a.delta[iDelta] = E_CONST * a.grad[iDelta] + A_CONST*a.prevDelta[iDelta];
-			iDelta++;
+			if (a.firstDelta == true){System.out.println("abra!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				a.prevDelta = new double[a.delta.length];
+				for(int j = 0;j<a.delta.length;j++){
+					a.prevDelta[j]=0;
+				}
+				a.firstDelta = false;
+			
+			}
+			for ( int g = 0; g<a.delta.length; g++){
+			a.delta[g] = E_CONST * a.grad[g] + A_CONST*a.prevDelta[g];
+			a.prevDelta[g] = a.delta[g]; 
+			}
 		}
 	}
 }
