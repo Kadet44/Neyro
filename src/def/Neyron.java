@@ -57,5 +57,11 @@ public class Neyron implements Neyro_Interface {
 		}
 		return super.toString();
 	}
+	 public String OuttoString() {
+			System.out.print("name = "+ name + "   ");
+			//System.out.println("value = "+ value);
+			System.out.println("activeVal = "+ activeVal);
+			return super.toString();
+		}
 
 }

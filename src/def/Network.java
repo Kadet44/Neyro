@@ -5,18 +5,18 @@ import java.io.FilterInputStream;
 public class Network {
 	 private static final double A_CONST = 0.3;
 	private static final double E_CONST = 0.7;
-	double Error;
-	 double IdealValue = 1;
-	 Layer firstLayer;
-	 Layer secondLayer;
-	 Layer thirdLayer;
-	 Layer outLayer;
+	double Error = 0.1;
+	static double IdealValue = 1;
+	static Layer firstLayer;
+	static Layer secondLayer;
+	static Layer thirdLayer;
+	static Layer outLayer;
 	 
-	public Network() {
-  Neyron n1 = new Neyron(0.8 ,"n1");
-  Neyron n2 = new Neyron(10,"n2");
-  Neyron n3 = new Neyron(0.7,"n3");
-  Neyron n4 = new Neyron(0.45,"n4");
+public Network() {
+  Neyron n1 = new Neyron(80 ,"n1");
+  Neyron n2 = new Neyron(73,"n2");
+  Neyron n3 = new Neyron(30,"n3");
+  Neyron n4 = new Neyron(25,"n4");
   Neyron[] neyromas = {n1,n2,n3,n4};
   firstLayer = new Layer(neyromas);
   
@@ -42,52 +42,87 @@ public class Network {
   firstLayer.setRadomWeight(secondLayer);
   secondLayer.setRadomWeight(thirdLayer);
   thirdLayer.setRadomWeight(outLayer);
-  for(int t = 0;t<4;t++){
-  firstLayer.active();
-  NetStart(firstLayer, secondLayer);
   
- 
-  secondLayer.active();
-  NetStart(secondLayer, thirdLayer);
-  
-
-  thirdLayer.active();
-  NetStart(thirdLayer, outLayer);
-
-  outLayer.active();
-  
-
-  CountSigmaOut();
-  CountSigma(thirdLayer, outLayer);
-  CountSigma(secondLayer, thirdLayer);
-  CountSigma(firstLayer, secondLayer);
-  
-  CountGrad(thirdLayer, outLayer);
-  CountGrad(secondLayer, thirdLayer);
-  CountGrad(firstLayer, secondLayer);
-  
-  CountDelta(thirdLayer);
-  CountDelta(secondLayer);
-  CountDelta(firstLayer);
-  
- 
-  
-   firstLayer.toString();
-   secondLayer.toString();
-   thirdLayer.toString();
-   outLayer.toString();
-   CountError();
-   
-   ChangeWeight(firstLayer);
-   ChangeWeight(secondLayer);
-   ChangeWeight(thirdLayer);
+  NetwokrStart();
+}
+	
+public Network(double n1, double n2, double n3, double n4){
+	 	
+	
+	
+		firstLayer.masNeyron[0].value = n1;
+		firstLayer.masNeyron[1].value = n2;
+		firstLayer.masNeyron[2].value = n3;
+		firstLayer.masNeyron[3].value = n4;
+		
+		secondLayer.masNeyron[0].value = 0;
+		secondLayer.masNeyron[1].value = 0;
+		secondLayer.masNeyron[2].value = 0;
+		secondLayer.masNeyron[3].value = 0;
+		
+		thirdLayer.masNeyron[0].value = 0;
+		thirdLayer.masNeyron[1].value = 0;
+		
+		outLayer.masNeyron[0].value = 0;
+		outLayer.masNeyron[0].activeVal = 0;
+		
+		
+		
+		System.out.println("-------------------------");
+		NetwokrStart();
+	
+}
+	
+  void NetwokrStart(){
+		  while (Error>0.0000000001){
+		  firstLayer.active();
+		  NetStart(firstLayer, secondLayer);
+		  
+		 
+		  secondLayer.active();
+		  NetStart(secondLayer, thirdLayer);
+		  
+		
+		  thirdLayer.active();
+		  NetStart(thirdLayer, outLayer);
+		
+		  outLayer.active();
+		  
+		
+		  CountSigmaOut();
+		  CountSigma(thirdLayer, outLayer);
+		  CountSigma(secondLayer, thirdLayer);
+		  CountSigma(firstLayer, secondLayer);
+		  
+		  CountGrad(thirdLayer, outLayer);
+		  CountGrad(secondLayer, thirdLayer);
+		  CountGrad(firstLayer, secondLayer);
+		  
+		  CountDelta(thirdLayer);
+		  CountDelta(secondLayer);
+		  CountDelta(firstLayer);
+		  
+		 
+		  
+		  firstLayer.toString();
+		  secondLayer.toString();
+		  thirdLayer.toString();
+		  outLayer.masNeyron[0].OuttoString();
+		   CountError();
+		   System.out.println(" ");
+		   
+		   ChangeWeight(firstLayer);
+		   ChangeWeight(secondLayer);
+		   ChangeWeight(thirdLayer);
   }
    
    
    
 }
+  
+  
 	
-	// Установка значений value после активации первого слоя
+	
 	void NetStart(Layer prevLayer, Layer nextLayer){
 	
 		for (Neyron prev : prevLayer.masNeyron){
@@ -154,11 +189,11 @@ public class Network {
 	} 
 	
 	void CountDelta(Layer curentLayer){
-		// Реализовать подсчет дельты для каждого синапса с учетом хранения предыдущего состояния дельты 
+	
 		int iDelta = 0;
 		for (Neyron a: curentLayer.masNeyron){
 			a.delta = new double [a.wieght.length];
-			if (a.firstDelta == true){System.out.println("abra!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			if (a.firstDelta == true){
 				a.prevDelta = new double[a.delta.length];
 				for(int j = 0;j<a.delta.length;j++){
 					a.prevDelta[j]=0;
